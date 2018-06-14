@@ -12,7 +12,7 @@ class Index
 {
     public function index()
     {
-
+        echo 1;
     }
 
     public function daoru1(){
@@ -38,9 +38,9 @@ class Index
 
 
             $user=new Table1Model;
-            $user->name=$strs[2];
-            $user->tel='';
-            $user->mobile=$strs[5];
+            $user->name=$strs[0];
+            $user->tel=$strs[1];
+            $user->mobile=$strs[2];
             $user->laiyuan='';
 
 
@@ -63,11 +63,8 @@ class Index
 
 }
 
-
-
 /**
- *
- *
+ * 
 table1是宏脉表，是最后需要的表，信息来源开始为空，可能有tel和mobile两个字段   1.xls
 table2是医汇通表有 name ,tel ,laiyuan     2.xls
 按顺序执行
@@ -87,19 +84,18 @@ SELECT *,COUNT(*) AS NUM FROM table2 GROUP BY `name` HAVING COUNT(*)>1;-- 查询
 
 
 
-UPDATE table1 INNER JOIN table2 ON table1.tel = table2.tel SET table1.laiyuan=table2.laiyuan; -- 更新手机号相同部分726
+UPDATE table1 INNER JOIN table2 ON table1.tel = table2.tel SET table1.laiyuan=table2.laiyuan; -- 更新手机号相同部分，注意table1的字段可能是moile或tel sql要修改下 454
 
-SELECT * FROM table1 INNER JOIN table2 ON table1.tel=table2.tel WHERE table1.`laiyuan`='' AND table1.`tel`!=''; -- 查询tel相同部分11
+SELECT * FROM table1 INNER JOIN table2 ON table1.tel=table2.tel WHERE table1.`laiyuan`='' AND table1.`tel`!=''; -- 查询tel相同部分，注意table1的字段可能是moile或tel sql要修改下11
 
 UPDATE table1 INNER JOIN table2 ON table1.tel=table2.tel SET table1.laiyuan=table2.laiyuan WHERE table1.`laiyuan`='' AND table1.`tel`!=''; -- 更新tel相同部分11
 
-SELECT *,COUNT(*) AS NUM FROM table1,table2 WHERE table1.name=table2.name AND table1.`laiyuan`='' GROUP BY table1.`name` HAVING COUNT(*)=1; -- 查询名字相同部分62
+SELECT *,COUNT(*) AS NUM FROM table1,table2 WHERE table1.name=table2.name AND table1.`laiyuan`='' GROUP BY table1.`name` HAVING COUNT(*)>=1; -- 查询名字相同部分，并且table1.laiyuan为空 62
 
 
 
 UPDATE table1 AS a
-INNER JOIN (SELECT table2.`laiyuan`,table2.`name`,COUNT(*) AS NUM FROM table1,table2 WHERE table1.name=table2.name AND table1.`laiyuan`='' GROUP BY table1.`name` HAVING COUNT(*)=1) AS b
+INNER JOIN (SELECT table2.`laiyuan`,table2.`name`,COUNT(*) AS NUM FROM table1,table2 WHERE table1.name=table2.name AND table1.`laiyuan`='' GROUP BY table1.`name` HAVING COUNT(*)>=1) AS b
 ON a.name=b.name SET a.laiyuan=b.laiyuan; -- 更新姓名相同部分 62
-
-
  */
+
