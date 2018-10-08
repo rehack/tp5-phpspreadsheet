@@ -38,16 +38,16 @@ class Index
 
 
             $user=new Table1Model;
-            $user->name=$strs[0];
-            $user->tel=$strs[1];
-            $user->mobile=$strs[2];
+            $user->name=$strs[3];
+            $user->tel=$strs[6];
+            $user->mobile=$strs[6];
             $user->laiyuan='';
 
 
             /* $user=new Table2Model;
-            $user->name=$strs[2];
-            $user->tel=$strs[6];
-            $user->laiyuan=$strs[8]; */
+            $user->name=$strs[0];
+            $user->tel=$strs[3];
+            $user->laiyuan=$strs[4]; */
 
             $result=$user->save();
             // $result=$user->fetchSql()->save();
