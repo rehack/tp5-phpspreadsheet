@@ -38,9 +38,9 @@ class Index
 
 
             $user=new Table1Model;
-            $user->name=$strs[1];
-            $user->tel=$strs[4];
-            $user->mobile=$strs[4];
+            $user->name=$strs[2];//序号从0开始
+            $user->tel=$strs[5];
+            $user->mobile=$strs[5];
             $user->laiyuan='';
 
 
@@ -87,9 +87,9 @@ class Index
 
 
             $user=new Table2Model;
-            $user->name=$strs[0];
-            $user->tel=$strs[3];
-            $user->laiyuan=$strs[4];
+            $user->name=$strs[1];
+            $user->tel=$strs[4];
+            $user->laiyuan=$strs[5];
 
             $result=$user->save();
             // $result=$user->fetchSql()->save();
